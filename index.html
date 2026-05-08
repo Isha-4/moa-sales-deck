@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mall of America - Sales Deck</title>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #0A0A0A;
+            color: #FFFFFF;
+            line-height: 1.6;
+        }
+
+        /* GENERAL SECTION STYLES */
+        section {
+            width: 100%;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 60px 40px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-size: cover;
+            background-position: center;
+            z-index: -1;
+            opacity: 0.3;
+        }
+
+        .section-content {
+            max-width: 1200px;
+            text-align: center;
+            z-index: 1;
+        }
+
+        h1 {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: clamp(48px, 8vw, 96px);
+            font-weight: 700;
+            letter-spacing: 2px;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            animation: fadeInDown 0.8s ease-out;
+        }
+
+        h2 {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: clamp(32px, 5vw, 64px);
+            font-weight: 700;
+            letter-spacing: 1px;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+        }
+
+        .subtitle {
+            font-family: 'Inter', sans-serif;
+            font-size: clamp(18px, 3vw, 24px);
+            font-weight: 400;
+            margin-bottom: 40px;
+            letter-spacing: 0.5px;
+            animation: fadeInUp 0.8s ease-out 0.2s backwards;
+        }
+
+        .description {
+            font-size: 16px;
+            line-height: 1.8;
+            margin-bottom: 30px;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+            color: #E0E0E0;
+        }
+
+        .stats-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+            margin: 40px 0;
+            max-width: 1000px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .stat {
+            padding: 20px;
+            background-color: rgba(255, 255, 255, 0.05);
+            border-radius: 8px;
+            border: 1px solid rgba(227, 24, 55, 0.3);
+        }
+
+        .stat-number {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 36px;
+            color: #E31837;
+            font-weight: 700;
+        }
+
+        .stat-label {
+            font-size: 14px;
+            color: #B0B0B0;
+            margin-top: 10px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 16px 50px;
+            margin: 20px 10px;
+            font-family: 'Inter', sans-serif;
+            font-size: 16px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+
+        .cta-red {
+            background-color: #E31837;
+            color: #FFFFFF;
+        }
+
+        .cta-red:hover {
+            background-color: #C71530;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(227, 24, 55, 0.4);
+        }
+
+        .cta-gold {
+            background-color: #C9A84C;
+            color: #0A0A0A;
+        }
+
+        .cta-gold:hover {
+            background-color: #B8963D;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(201, 168, 76, 0.4);
+        }
+
+        /* SECTION 1: OPENING */
+        #opening {
+            background: linear-gradient(135deg, #0A0A0A 0%, #1A1A1A 100%);
+        }
+
+        .opening-content {
+            padding: 60px 40px;
+            background-color: rgba(201, 168, 76, 0.15);
+            border: 2px solid #C9A84C;
+            border-radius: 8px;
+            max-width: 700px;
+            animation: slideInUp 0.8s ease-out;
+        }
+
+        .opening-content h1 {
+            color: #FFFFFF;
+            margin-bottom: 15px;
+        }
+
+        .opening-content .subtitle {
+            color: #E0E0E0;
+        }
+
+        /* SECTION 2: WHY THIS MALL */
+        #why-this-mall {
+            background: linear-gradient(135deg, #1A1A1A 0%, #0A0A0A 100%);
+        }
+
+        .highlight-box {
+            background-color: rgba(227, 24, 55, 0.1);
+            border-left: 4px solid #E31837;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 4px;
+        }
+
+        /* SECTION 3: RETAIL */
+        #retail {
+            background: linear-gradient(135deg, #0A0A0A 0%, #1A1A1A 100%);
+        }
+
+        .brands-highlight {
+            background-color: rgba(227, 24, 55, 0.1);
+            padding: 30px;
+            border-radius: 8px;
+            margin: 30px 0;
+            border: 1px solid rgba(227, 24, 55, 0.3);
+        }
+
+        .brands-highlight p {
+            font-size: 14px;
+            color: #E0E0E0;
+            margin: 10px 0;
+            font-weight: 600;
+        }
+
+        /* SECTION 4: LUXURY */
+        #luxury {
+            background: linear-gradient(135deg, #1A1A1A 0%, #0A0A0A 100%);
+        }
+
+        .luxury-content {
+            padding: 40px;
+            background: linear-gradient(135deg, rgba(201, 168, 76, 0.15) 0%, rgba(227, 24, 55, 0.1) 100%);
+            border: 2px solid #C9A84C;
+            border-radius: 8px;
+            max-width: 800px;
+        }
+
+        /* SECTION 5: DINING & LIFESTYLE */
+        #dining {
+            background: linear-gradient(135deg, #0A0A0A 0%, #1A1A1A 100%);
+        }
+
+        /* SECTION 6: ENTERTAINMENT */
+        #entertainment {
+            background: linear-gradient(135deg, #1A1A1A 0%, #0A0A0A 100%);
+        }
+
+        .attractions {
+            background-color: rgba(227, 24, 55, 0.1);
+            padding: 30px;
+            border-radius: 8px;
+            margin: 30px 0;
+            border: 1px solid rgba(227, 24, 55, 0.3);
+        }
+
+        .attraction-item {
+            margin: 15px 0;
+            padding: 15px;
+            background-color: rgba(255, 255, 255, 0.03);
+            border-radius: 4px;
+            border-left: 3px solid #E31837;
+        }
+
+        .attraction-item strong {
+            color: #E31837;
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 16px;
+        }
+
+        /* SECTION 7: EVENTS */
+        #events {
+            background: linear-gradient(135deg, #0A0A0A 0%, #1A1A1A 100%);
+        }
+
+        /* ANIMATIONS */
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes slideInUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 768px) {
+            section {
+                padding: 40px 20px;
+            }
+
+            h1 {
+                font-size: 40px;
+            }
+
+            h2 {
+                font-size: 28px;
+            }
+
+            .stats-container {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+
+            .cta-button {
+                padding: 12px 40px;
+                font-size: 14px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- SECTION 1: OPENING -->
+    <section id="opening">
+        <div class="section-content">
+            <div class="opening-content">
+                <h1>ALWAYS NEW</h1>
+                <p class="subtitle">America's Largest Shopping & Entertainment Destination</p>
+                <button class="cta-button cta-red">Explore</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 2: WHY THIS MALL -->
+    <section id="why-this-mall">
+        <div class="section-content">
+            <h2>THE SCALE. THE ENERGY. THE OPPORTUNITY.</h2>
+            <p class="subtitle">5.6M sq ft | 520+ Stores | 40M+ Annual Visitors</p>
+            
+            <p class="description">
+                Located just 1.5 miles from Minneapolis-Saint Paul International Airport, Mall of America is home to the nation's largest indoor entertainment complex. Every year, 40+ million visitors from 150+ countries experience the scale, energy, and opportunity that only MOA can deliver.
+            </p>
+
+            <div class="stats-container">
+                <div class="stat">
+                    <div class="stat-number">30M+</div>
+                    <div class="stat-label">People Within Day's Drive</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-number">2.5x</div>
+                    <div class="stat-label">International Visitor Spend</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-number">$437M</div>
+                    <div class="stat-label">Annual Tourist Spending</div>
+                </div>
+            </div>
+
+            <button class="cta-button cta-red">Learn More</button>
+        </div>
+    </section>
+
+    <!-- SECTION 3: RETAIL -->
+    <section id="retail">
+        <div class="section-content">
+            <h2>520+ WORLD-CLASS RETAILERS</h2>
+            <p class="subtitle">From Flagship to Pop-Up, Find Your Perfect Fit</p>
+            
+            <p class="description">
+                With no sales tax on clothing and shoes in Minnesota, MOA is the retail destination for shoppers worldwide. Whether you're looking for flagship locations, emerging brands, or high-impact pop-ups, MOA offers unmatched visibility and foot traffic.
+            </p>
+
+            <div class="brands-highlight">
+                <p><strong>NEW 2025-26:</strong> Primark | MINISO | NBA Store | New Balance | Victoria's Secret | Pandora</p>
+            </div>
+
+            <div class="stats-container">
+                <div class="stat">
+                    <div class="stat-number">100K+</div>
+                    <div class="stat-label">Daily Visitors</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-number">$162</div>
+                    <div class="stat-label">Average Spend Per Visit</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-number">65%</div>
+                    <div class="stat-label">Repeat Visitor Rate</div>
+                </div>
+            </div>
+
+            <button class="cta-button cta-red">Lease Inquiry</button>
+        </div>
+    </section>
+
+    <!-- SECTION 4: LUXURY -->
+    <section id="luxury">
+        <div class="section-content">
+            <h2>ELEVATED EXPERIENCES</h2>
+            <p class="subtitle">Premium Positioning for Premium Brands</p>
+            
+            <div class="luxury-content">
+                <p class="description">
+                    MOA's luxury wing attracts affluent travelers and local high-net-worth individuals year-round. Premium brands enjoy elevated positioning, dedicated spaces, and access to a global audience seeking luxury experiences.
+                </p>
+                
+                <p style="margin: 20px 0; font-weight: 600; color: #C9A84C;">
+                    Featured Luxury Brands: Louis Vuitton | Gucci | Prada | Hermès
+                </p>
+
+                <div class="stats-container">
+                    <div class="stat">
+                        <div class="stat-number">∞</div>
+                        <div class="stat-label">Premium Shoppers</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-number">↑</div>
+                        <div class="stat-label">High Transaction Values</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-number">365</div>
+                        <div class="stat-label">Days of Foot Traffic</div>
+                    </div>
+                </div>
+            </div>
+
+            <button class="cta-button cta-gold">Partnership Inquiry</button>
+        </div>
+    </section>
+
+    <!-- SECTION 5: DINING & LIFESTYLE -->
+    <section id="dining">
+        <div class="section-content">
+            <h2>CULINARY DESTINATIONS & LIFESTYLE EXPERIENCES</h2>
+            <p class="subtitle">50+ Restaurants. Endless Possibilities.</p>
+            
+            <p class="description">
+                Food is not an afterthought at MOA—it's a destination. With 50+ restaurants ranging from quick-service to fine dining, MOA drives extended visits and increased per-capita spending. Diners stay longer. They spend more. They come back.
+            </p>
+
+            <div class="brands-highlight">
+                <p>International cuisines from casual to fine dining</p>
+                <p>Branded experiences like Rainforest Cafe</p>
+                <p><strong>Average visit duration with food: 4+ hours</strong></p>
+            </div>
+
+            <div class="stats-container">
+                <div class="stat">
+                    <div class="stat-number">50+</div>
+                    <div class="stat-label">Dining Venues</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-number">4+</div>
+                    <div class="stat-label">Hours Avg Visit</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-number">↑</div>
+                    <div class="stat-label">Spending per Visit</div>
+                </div>
+            </div>
+
+            <button class="cta-button cta-red">Restaurant Inquiry</button>
+        </div>
+    </section>
+
+    <!-- SECTION 6: ENTERTAINMENT & ATTRACTIONS -->
+    <section id="entertainment">
+        <div class="section-content">
+            <h2>WHERE PEOPLE COME TO PLAY</h2>
+            <p class="subtitle">Nickelodeon Universe. SEA LIFE. And Beyond.</p>
+            
+            <p class="description">
+                Entertainment is MOA's differentiator. With Nickelodeon Universe—America's largest indoor theme park—and SEA LIFE Minnesota Aquarium, MOA isn't just a mall. It's a destination that draws 100,000+ daily visitors specifically for the experience.
+            </p>
+
+            <div class="attractions">
+                <div class="attraction-item">
+                    <strong>NICKELODEON UNIVERSE:</strong> 7 acres | 20+ rides | 200M+ rides taken
+                </div>
+                <div class="attraction-item">
+                    <strong>SEA LIFE AQUARIUM:</strong> 1.3M gallons | 300-foot underwater tunnel
+                </div>
+                <div class="attraction-item">
+                    Plus: FlyOver America | Crayola Experience | Adventure Golf | DUCK! Arcade
+                </div>
+            </div>
+
+            <div class="stats-container">
+                <div class="stat">
+                    <div class="stat-number">7</div>
+                    <div class="stat-label">Acres of Theme Park</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-number">200M+</div>
+                    <div class="stat-label">Rides Taken</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-number">1.3M</div>
+                    <div class="stat-label">Aquarium Gallons</div>
+                </div>
+            </div>
+
+            <button class="cta-button cta-red">Activation Inquiry</button>
+        </div>
+    </section>
+
+    <!-- SECTION 7: EVENTS & PLATFORM -->
+    <section id="events">
+        <div class="section-content">
+            <h2>A GLOBAL PLATFORM FOR EVERY OCCASION</h2>
+            <p class="subtitle">Concerts. Brand Activations. Corporate Events. Your Story Here.</p>
+            
+            <p class="description">
+                MOA is more than a destination—it's a platform. From global concerts to brand activations to corporate events, MOA has hosted world-class experiences. When you book here, you're not just renting a space. You're gaining access to 40+ million annual visitors and a reputation for unforgettable moments.
+            </p>
+
+            <div class="brands-highlight">
+                <p>Event capabilities: Concerts | Brand Activations | Corporate Events | Product Launches | Trade Shows | Celebrity Appearances</p>
+            </div>
+
+            <div class="stats-container">
+                <div class="stat">
+                    <div class="stat-number">40M+</div>
+                    <div class="stat-label">Annual Visitors</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-number">∞</div>
+                    <div class="stat-label">Global Reach</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-number">✓</div>
+                    <div class="stat-label">World-Class Facilities</div>
+                </div>
+            </div>
+
+            <button class="cta-button cta-red">Book Venue</button>
+        </div>
+    </section>
+
+</body>
+</html>
